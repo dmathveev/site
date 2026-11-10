@@ -17,40 +17,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Jost:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
-:root{--bg:#f6f1e6;--ink:#2a2931;--mute:#6e6a78;--dark:#38373f;--red:#e8212a;--vio:#6f5fcf}
+:root{--bg:#f6f1e6;--ink:#2a2931;--mute:#6e6a78;--dark:#38373f;--red:#e8212a;--vio:#6f5fcf;--vio-mid:#8577dc}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:17px/1.6 "Jost","Helvetica Neue",Arial,sans-serif}
-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px clamp(20px,4vw,48px)}
-.brand{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.26em;font-weight:500;font-size:.95rem}
-.brand img{height:38px;width:auto;display:block}
-.role{text-transform:uppercase;letter-spacing:.2em;font-size:.78rem;color:var(--mute);text-align:right}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:18px clamp(16px,4vw,48px)}
+.name,.role{text-transform:uppercase;font-weight:500}
+.name{letter-spacing:.26em;font-size:.95rem}
+.role{letter-spacing:.2em;font-size:.78rem;color:var(--mute);text-align:right}
+.br{display:none}.logo{display:block}.logo img{height:54px;width:auto;display:block}
 main{flex:1;padding:8px 0 56px}
-.slider{position:relative;width:min(94vw,1360px);margin:0 auto;aspect-ratio:16/9;background:#e9e2d2;overflow:hidden}
+.slider{position:relative;width:min(94vw,1360px);margin:0 auto;aspect-ratio:16/9;background:#e9e2d2;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
 .slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s ease}
 .slide.on{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover;display:block}
-figcaption{position:absolute;left:0;bottom:0;background:var(--bg);padding:8px 18px;font-size:.82rem;color:var(--mute)}
-.dots{position:absolute;right:16px;bottom:16px;display:flex;gap:10px}
-.dots button{width:12px;height:12px;border:1.5px solid var(--ink);background:var(--bg);padding:0;border-radius:50%;cursor:pointer}
-.dots button.on{background:var(--red);border-color:var(--red)}
-.slogan{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.2;text-align:center;margin:56px 20px 0}
-footer{background:var(--dark);color:#ece8f2;text-align:center;padding:44px 20px 28px}
-.links{display:flex;justify-content:center;gap:40px;margin-bottom:32px}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none}
+figcaption{position:absolute;left:16px;bottom:16px;max-width:calc(100% - 140px);background:rgba(246,241,230,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 14px;font-size:.82rem;line-height:1.35;color:var(--ink)}
+.dots{position:absolute;right:16px;bottom:16px;display:flex;gap:4px}
+.dots button{width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dots button::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--vio-mid)}
+.dots button.on::before{background:var(--red)}
+footer{background:var(--dark);color:#ece8f2;text-align:center;padding:56px 20px 28px}
+.slogan{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.25;max-width:30ch;margin:0 auto 44px}
+.slogan::before{content:"";display:block;width:56px;height:2px;background:var(--red);margin:0 auto 24px}
+.links{display:flex;justify-content:center;gap:40px;margin-bottom:36px}
 .links a{color:#ece8f2;display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase}
 .links span.ic{width:54px;height:54px;border:1.5px solid #ece8f2;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.25s}
 .links a:hover .ic,.links a:focus-visible .ic{background:var(--red);border-color:var(--red)}
 .links svg{width:24px;height:24px;fill:#ece8f2}
-a:focus-visible,button:focus-visible{outline:2px solid var(--vio);outline-offset:3px}
+a:focus-visible,button:focus-visible,.slider:focus-visible{outline:2px solid var(--vio);outline-offset:3px}
 .copy{font-size:.82rem;color:#a9a5b4}
-@media(max-width:640px){header{flex-direction:column;align-items:flex-start;gap:8px}.role{text-align:left}.slider{aspect-ratio:4/3;width:100%}.slogan{margin-top:40px}}
+@media(max-width:640px){.br{display:inline}header{gap:6px;padding:14px 14px}.name{letter-spacing:.14em;font-size:.68rem}.role{letter-spacing:.08em;font-size:.62rem;line-height:1.3}.logo img{height:44px}.slider{aspect-ratio:4/3;width:100%}figcaption{max-width:calc(100% - 150px);font-size:.75rem;left:10px;bottom:10px;padding:6px 10px}.dots{right:6px;bottom:6px;gap:0}.dots button{width:22px;height:22px}.dots button::before{width:10px;height:10px}}
 @media(prefers-reduced-motion:reduce){.slide{transition:none}}
 </style></head><body>
-<header><div class="brand"><img src="logo.png" alt="">Комбинация</div><div class="role">Архитектурное бюро</div></header>
+<header><div class="name">Комбинация</div><a class="logo" href="./" aria-label="Комбинация"><img src="logo.png" alt=""></a><div class="role">Архитектурное<br class="br"> бюро</div></header>
 <main>
 <div class="slider" role="region" aria-label="Фотографии проектов"><figure class="slide"><img src="images/1.jpg" alt="Клиника «Три сестры». Детский зал" onerror="this.remove()"><figcaption>Клиника «Три сестры». Детский зал</figcaption></figure><figure class="slide"><img src="images/2.jpg" alt="Клиника «Три сестры». Концепция вестибюля" onerror="this.remove()"><figcaption>Клиника «Три сестры». Концепция вестибюля</figcaption></figure><figure class="slide"><img src="images/3.jpg" alt="Клиника «Семейная». Вестибюль" onerror="this.remove()"><figcaption>Клиника «Семейная». Вестибюль</figcaption></figure><figure class="slide"><img src="images/4.jpg" alt="Клиника «Семейная»" onerror="this.remove()"><figcaption>Клиника «Семейная»</figcaption></figure><figure class="slide"><img src="images/5.jpg" alt="Клиника «Семейная»" onerror="this.remove()"><figcaption>Клиника «Семейная»</figcaption></figure><div class="dots"></div></div>
-<p class="slogan">Изящные решения ваших головоломок</p>
 </main>
 <footer>
+<p class="slogan">Изящные решения архитектурных головоломок</p>
 <div class="links">
 <a href="https://t.me/Nmatarch" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="ic"><svg viewBox="0 0 24 24"><path d="M21.5 3.4 2.9 10.6c-.9.4-.9 1.1-.2 1.3l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.8 4.8c.3-1.2-.5-1.7-1.3-1.4zM9 13.1l9.1-5.7c.4-.3.8-.1.5.2l-7.6 6.900-.3 3.300z"/></svg></span>Telegram</a>
 <a href="https://max.ru/u/f9LHodD0cOIzpN-cpc4jOpqXBx1iyMaWAAC7V1ezHPbYQ7lyZukBph-pYlY" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="ic"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.5c-5.200 0-9 3.700-9 8.6 0 2.5 1 4.6 2.700 6.100l-.6 3.6c-.1.600.5 1 1 .7l3.300-1.9c.8.200 1.700.3 2.600.3 5.200 0 9-3.700 9-8.6S17.200 2.5 12 2.5zm-4.200 11V8.800l2.700 3.100h1l2.700-3.100v4.700h1.700V7.200h-1.400L11 10.800 7.500 7.200H6.100v6.300z"/></svg></span>Max</a>
@@ -58,14 +61,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--vio);outline-offset
 <div class="copy">© 2026 Комбинация</div>
 </footer>
 <script>
-(function(){var s=document.querySelector('.slider'),sl=s.querySelectorAll('.slide'),dots=s.querySelector('.dots'),i=0,t,paused=false,x0=null;
+(function(){var s=document.querySelector('.slider'),sl=s.querySelectorAll('.slide'),dots=s.querySelector('.dots'),i=0,t,x0=null,moved=false;
 var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-sl.forEach(function(_,n){var b=document.createElement('button');b.setAttribute('aria-label','Слайд '+(n+1));b.onclick=function(){go(n)};dots.appendChild(b)});
+s.tabIndex=0;s.setAttribute('aria-label','Фотографии проектов. Нажмите, чтобы перейти к следующей');
+sl.forEach(function(_,n){var b=document.createElement('button');b.setAttribute('aria-label','Слайд '+(n+1));b.onclick=function(e){e.stopPropagation();go(n)};dots.appendChild(b)});
 function go(n){i=(n+sl.length)%sl.length;sl.forEach(function(e,k){e.classList.toggle('on',k===i)});dots.querySelectorAll('button').forEach(function(b,k){b.classList.toggle('on',k===i)});run()}
-function run(){clearInterval(t);if(!reduce)t=setInterval(function(){if(!paused)go(i+1)},5500)}
-s.onmouseenter=function(){paused=true};s.onmouseleave=function(){paused=false};
-s.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-s.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(i+(d<0?1:-1));x0=null});
+function run(){clearInterval(t);if(!reduce)t=setInterval(function(){go(i+1)},5500)}
+s.addEventListener('click',function(){if(!moved)go(i+1);moved=false});
+s.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+s.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;moved=false},{passive:true});
+s.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40){moved=true;go(i+(d<0?1:-1))}x0=null});
 go(0)})();
 </script>
 </body></html>
